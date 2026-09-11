@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0d0d0d;
+  --foreground: #ffffff;
+  --brand: #3987e5;
+  --brand-secondary: #199e70;
+  --surface: #1a1a19;
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --panel: #15201c;
+  --panel-border: rgba(25, 158, 112, 0.28);
+  --status-good: #0ca30c;
+  --status-bad: #d03b3b;
+  --ink-secondary: #c3c2b7;
+  --ink-muted: #898781;
+  --grid: #2c2c2a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-surface: var(--surface);
+  --color-surface-border: var(--surface-border);
+  --color-panel: var(--panel);
+  --color-panel-border: var(--panel-border);
+  --color-status-good: var(--status-good);
+  --color-status-bad: var(--status-bad);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(57, 135, 229, 0.10), transparent 40%),
+    radial-gradient(circle at 85% 0%, rgba(25, 158, 112, 0.08), transparent 40%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+/* 미세한 격자 배경 — 브랜드 강조와 겹치지 않도록 헤더 영역에만 */
+.grid-glow {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
