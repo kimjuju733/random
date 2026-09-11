@@ -174,7 +174,12 @@ export default function Home() {
   );
 
   const mealChampion = useMemo(
-    () => topByComponent(filteredRecords, "mealAllowance"),
+    () => topByComponent(filteredRecords, "mealAllowance", "max"),
+    [filteredRecords],
+  );
+
+  const mealMinimalist = useMemo(
+    () => topByComponent(filteredRecords, "mealAllowance", "min"),
     [filteredRecords],
   );
 
@@ -330,8 +335,13 @@ export default function Home() {
 
       {view === "components" && (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <MealChampionCard champion={mealChampion} periodLabel={mealPeriodLabel} />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <MealChampionCard champion={mealChampion} periodLabel={mealPeriodLabel} mode="max" />
+            <MealChampionCard
+              champion={mealMinimalist}
+              periodLabel={mealPeriodLabel}
+              mode="min"
+            />
             {topComponent && (
               <KpiCard
                 label="가장 비중 큰 지급 항목"

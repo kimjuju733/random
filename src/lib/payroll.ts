@@ -265,10 +265,11 @@ export type TopByComponent = {
   value: number;
 };
 
-/** 필터링된 기간(월 또는 연간 누적) 내에서 특정 지급 항목 합계가 가장 큰 직원. */
+/** 필터링된 기간(월 또는 연간 누적) 내에서 특정 지급 항목 합계가 가장 크거나(max) 작은(min) 직원. */
 export function topByComponent(
   records: PayrollRecord[],
   key: PayComponentKey,
+  mode: "max" | "min" = "max",
 ): TopByComponent | null {
   const byEmployee = new Map<string, TopByComponent>();
   for (const r of records) {
@@ -284,7 +285,9 @@ export function topByComponent(
   }
   const list = [...byEmployee.values()];
   if (list.length === 0) return null;
-  return list.reduce((best, cur) => (cur.value > best.value ? cur : best));
+  return list.reduce((best, cur) =>
+    mode === "max" ? (cur.value > best.value ? cur : best) : cur.value < best.value ? cur : best,
+  );
 }
 
 export function formatKRW(n: number): string {
